@@ -12,6 +12,8 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: #f9fcff;
+  background-image: linear-gradient(340deg, #dee4ea 0%, #f9fcff 74%);
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
