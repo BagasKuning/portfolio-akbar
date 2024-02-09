@@ -1,17 +1,15 @@
 export const Navbar = () => {
-    return (
-        <navbar className="flex max-w-[1200px]">
-            <div className="">
-                Akbar.Dev
-            </div>
+  return (
+    <navbar className="absolute top-0 left-1/2 -translate-x-1/2 w-full flex m-auto max-w-[1250px] h-10 items-center justify-between">
+      <div className="">Akbar.Dev</div>
 
-            <div>
-                <a href="#">Works</a>
-                <a href="#">About</a>
-                <a href="#">Resume</a>
-            </div>
-        </navbar>
-    )
-}
+      <div className="flex gap-3">
+        <a href="#">Works</a>
+        <a href="#">About</a>
+        <a href="#">Resume</a>
+      </div>
+    </navbar>
+  );
+};
 
 export default Navbar;
