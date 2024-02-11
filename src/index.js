@@ -6,7 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-AOS.init(); // Initialize AOS
+AOS.init({
+  once: false
+}); // Initialize AOS
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

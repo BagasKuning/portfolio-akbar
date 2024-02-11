@@ -10,7 +10,7 @@ module.exports = {
       },
       grayscale: {
         50: '50%',
-        75: '75%',
+        85: '85%',
       },
       fontFamily: {
         nunito: ["Nunito Sans", "sans-serif"]

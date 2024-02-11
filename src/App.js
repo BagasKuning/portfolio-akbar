@@ -8,6 +8,9 @@ function App() {
         <Navbar />
       </div>
       <Hero />
+      <div className="h-[1000px]">
+
+      </div>
     </div>
   );
 }
