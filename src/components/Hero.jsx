@@ -6,6 +6,7 @@ export default function Hero() {
   const nameCopy = useRef(null);
   const bgSectionRef = useRef(null);
   const [isScrolledToBgSection, setIsScrolledToBgSection] = useState(false);
+  const [nameTransform, setNameTransform] = useState("translateY(0)");
 
   useEffect(() => {
     const sectionElement = nameSection.current;
@@ -22,8 +23,11 @@ export default function Hero() {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const bgSectionOffsetTop = bgSectionRef.current.offsetTop;
-      console.log(bgSectionOffsetTop);
       setIsScrolledToBgSection(scrollY >= bgSectionOffsetTop);
+
+      // Menerapkan transformasi CSS pada judul berdasarkan posisi scroll
+      const translateY = scrollY / 6;
+      setNameTransform(`translateY(${translateY}px)`);
     };
 
     // Tambahkan event listener ketika komponen dimount
@@ -38,11 +42,15 @@ export default function Hero() {
   return (
     <div className="mx-12 sm:text-base text-sm ">
       <div className="max-w-[1100px] flex lg:gap-4 gap-6 flex-col lg:h-screen h-[810px] m-auto pb-1">
-        <div ref={nameCopy} />
+        <div ref={nameCopy} className="pt-16" />
         <div
           ref={nameSection}
           className="fixed z-0 max-w-[1100px] mr-11 pt-16"
-          style={{ opacity: isScrolledToBgSection ? 0 : 1 }} // Mengubah opasitas sesuai dengan state isScrolledToBgSection
+          style={{
+            display: isScrolledToBgSection ? "none" : "block", // Mengubah opasitas sesuai dengan state isScrolledToBgSection
+            transform: nameTransform, // Terapkan transformasi CSS pada judul
+            transition: "transform 0.3s ease", // Tambahkan transisi untuk efek yang mulus
+          }}
         >
           <section className="sm:text-7xl text-5xl font-bold">
             <h1
@@ -50,6 +58,7 @@ export default function Hero() {
               data-aos-duration="550"
               data-aos-easing="ease"
               data-aos-delay="1100"
+              data-aos-anchor-placement="top-bottom"
             >
               Muhammad
             </h1>
@@ -58,6 +67,7 @@ export default function Hero() {
               data-aos-duration="550"
               data-aos-easing="ease"
               data-aos-delay="500"
+              data-aos-anchor-placement="top-bottom"
             >
               Akbar Perdana
             </h1>
@@ -67,15 +77,18 @@ export default function Hero() {
             data-aos-duration="550"
             data-aos-easing="ease-in"
           >
-            I am a highly motivated and enthusiastic software engineer with a
-            specialization in frontend development. With a passion for creating
-            visually appealing and user-friendly web experiences
+            I am a Software Engineer focused on{" "}
+            <span className="sm:text-lg text-base">Back-End</span> development. Strongly
+            experience in designing and implementing technical solutions for
+            various projects. I am ready to make a meaningful contribution
+            provide a great user experience and maintain that performance its
+            application remains optimal
           </p>
         </div>
 
         <div
           ref={bgSectionRef}
-          className="w-full lg:h-2/6 h-1/2 flex-grow grayscale-85 z-10"
+          className="w-full h-auto flex-grow grayscale-85 z-10"
           style={{
             backgroundImage: `url(${bgSection})`,
             backgroundSize: "cover",
@@ -94,7 +107,9 @@ export default function Hero() {
           <div className="flex-1">
             <h2 className="text-lg">Timeframe</h2>
             <p className="opacity-98">
-              illum voluptates, harum repellendus vero vitae?
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea
+              deserunt natus nobis repudiandae dolore libero ullam dicta, vitae
+              recusandae delectus
             </p>
           </div>
         </div>
