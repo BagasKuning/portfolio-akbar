@@ -10,39 +10,23 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 export default function Hero() {
   const main = useRef();
 
-  useGSAP(
-    () => {
+  useGSAP( () => {
       var tl = gsap.timeline({
         scrollTrigger: {
-            trigger: ".text",
-            start: "top",
-            end: "bottom",
-            scrub: true,
-            markers: true,
-        }
-    });
-    
-    tl.to(".text", {
+          trigger: ".text",
+          start: "top",
+          end: "bottom",
+          scrub: true,
+          markers: false,
+        },
+      });
+
+      tl.to(".text", {
         y: 230,
         opacity: 0,
-        ease: "power4.out"
-    });
-      // const texts = gsap.utils.toArray('.text')
-      // texts.forEach((text) => {
-      //   gsap.to(text, {
-      //     x: 250,
-      //     scrollTrigger: {
-      //       trigger: text,
-      //       start: 'bottom bottom',
-      //       end: 'top 20%',
-      //       scrub: true,
-      //       markers: true,
-      //     },
-      //   });
-      // })
-    },
-    { scope: main }
-  );
+        ease: "power4.out",
+      });
+    }, { scope: main });
 
   return (
     <div className="mx-12 sm:text-base text-sm " ref={main}>
