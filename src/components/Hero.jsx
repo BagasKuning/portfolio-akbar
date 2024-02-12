@@ -1,53 +1,99 @@
 import { useEffect, useRef, useState } from "react";
 import bgSection from "../images/bg-section2.jpg";
+import { gsap } from "gsap";
+
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Hero() {
   const nameSection = useRef(null);
   const nameCopy = useRef(null);
   const bgSectionRef = useRef(null);
-  const [isScrolledToBgSection, setIsScrolledToBgSection] = useState(false);
+  const [isScrolledToBgSection, setIsScrolledToBgSection] = useState(100);
   const [nameTransform, setNameTransform] = useState("translateY(0)");
 
-  useEffect(() => {
-    const sectionElement = nameSection.current;
-    const copyElement = nameCopy.current;
+  // useEffect(() => {
+  //   const sectionElement = nameSection.current;
+  //   const copyElement = nameCopy.current;
 
-    if (sectionElement && copyElement) {
-      const sectionWidth = sectionElement.offsetWidth;
-      const sectionHeight = sectionElement.offsetHeight;
+  //   if (sectionElement && copyElement) {
+  //     const sectionWidth = sectionElement.offsetWidth;
+  //     const sectionHeight = sectionElement.offsetHeight;
 
-      copyElement.style.width = `${sectionWidth}px`;
-      copyElement.style.height = `${sectionHeight}px`;
-    }
+  //     copyElement.style.width = `${sectionWidth}px`;
+  //     copyElement.style.height = `${sectionHeight}px`;
+  //   }
 
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const bgSectionOffsetTop = bgSectionRef.current.offsetTop;
-      setIsScrolledToBgSection(scrollY >= bgSectionOffsetTop);
+  //   const handleScroll = () => {
+  //     const scrollY = window.scrollY;
+  //     const bgSectionOffsetTop = bgSectionRef.current.offsetTop;
 
-      // Menerapkan transformasi CSS pada judul berdasarkan posisi scroll
-      const translateY = scrollY / 6;
-      setNameTransform(`translateY(${translateY}px)`);
-    };
+  //     setIsScrolledToBgSection(40 / scrollY);
+  //     if(scrollY >= bgSectionOffsetTop){
+  //       setIsScrolledToBgSection(0)
+  //     }
 
-    // Tambahkan event listener ketika komponen dimount
-    window.addEventListener("scroll", handleScroll);
+  //     // Menerapkan transformasi CSS pada judul berdasarkan posisi scroll
+  //     const translateY = scrollY / 6;
+  //     setNameTransform(`translateY(${translateY}px)`);
+  //   };
 
-    // Membersihkan event listener ketika komponen di-unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  //   // Tambahkan event listener ketika komponen dimount
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   // Membersihkan event listener ketika komponen di-unmount
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+
+  const main = useRef();
+
+  useGSAP(
+    () => {
+      var tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".text",
+            start: "top",
+            end: "bottom",
+            scrub: true,
+            markers: true,
+        }
+    });
+    
+    tl.to(".text", {
+        y: 230,
+        opacity: 0,
+        ease: "power4.out"
+    });
+      // const texts = gsap.utils.toArray('.text')
+      // texts.forEach((text) => {
+      //   gsap.to(text, {
+      //     x: 250,
+      //     scrollTrigger: {
+      //       trigger: text,
+      //       start: 'bottom bottom',
+      //       end: 'top 20%',
+      //       scrub: true,
+      //       markers: true,
+      //     },
+      //   });
+      // })
+    },
+    { scope: main }
+  );
 
   return (
-    <div className="mx-12 sm:text-base text-sm ">
+    <div className="mx-12 sm:text-base text-sm " ref={main}>
       <div className="max-w-[1100px] flex lg:gap-4 gap-6 flex-col lg:h-screen h-[810px] m-auto pb-1">
-        <div ref={nameCopy} className="pt-16" />
+        {/* <div ref={nameCopy} className="pt-16" /> */}
         <div
           ref={nameSection}
-          className="fixed z-0 max-w-[1100px] mr-11 pt-16"
+          className="text z-0 max-w-[1100px] mr-11 pt-16"
           style={{
-            display: isScrolledToBgSection ? "none" : "block", // Mengubah opasitas sesuai dengan state isScrolledToBgSection
+            opacity: isScrolledToBgSection, // Mengubah opasitas sesuai dengan state isScrolledToBgSection
             transform: nameTransform, // Terapkan transformasi CSS pada judul
             transition: "transform 0.3s ease", // Tambahkan transisi untuk efek yang mulus
           }}
@@ -78,11 +124,11 @@ export default function Hero() {
             data-aos-easing="ease-in"
           >
             I am a Software Engineer focused on{" "}
-            <span className="sm:text-lg text-base">Back-End</span> development. Strongly
-            experience in designing and implementing technical solutions for
-            various projects. I am ready to make a meaningful contribution
-            provide a great user experience and maintain that performance its
-            application remains optimal
+            <span className="sm:text-lg text-base">Back-End</span> development.
+            Strongly experience in designing and implementing technical
+            solutions for various projects. I am ready to make a meaningful
+            contribution provide a great user experience and maintain that
+            performance its application remains optimal
           </p>
         </div>
 
