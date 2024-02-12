@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import bgSection from "../images/bg-section2.jpg";
 import { gsap } from "gsap";
 
@@ -8,47 +8,6 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Hero() {
-  const nameSection = useRef(null);
-  const nameCopy = useRef(null);
-  const bgSectionRef = useRef(null);
-  const [isScrolledToBgSection, setIsScrolledToBgSection] = useState(100);
-  const [nameTransform, setNameTransform] = useState("translateY(0)");
-
-  // useEffect(() => {
-  //   const sectionElement = nameSection.current;
-  //   const copyElement = nameCopy.current;
-
-  //   if (sectionElement && copyElement) {
-  //     const sectionWidth = sectionElement.offsetWidth;
-  //     const sectionHeight = sectionElement.offsetHeight;
-
-  //     copyElement.style.width = `${sectionWidth}px`;
-  //     copyElement.style.height = `${sectionHeight}px`;
-  //   }
-
-  //   const handleScroll = () => {
-  //     const scrollY = window.scrollY;
-  //     const bgSectionOffsetTop = bgSectionRef.current.offsetTop;
-
-  //     setIsScrolledToBgSection(40 / scrollY);
-  //     if(scrollY >= bgSectionOffsetTop){
-  //       setIsScrolledToBgSection(0)
-  //     }
-
-  //     // Menerapkan transformasi CSS pada judul berdasarkan posisi scroll
-  //     const translateY = scrollY / 6;
-  //     setNameTransform(`translateY(${translateY}px)`);
-  //   };
-
-  //   // Tambahkan event listener ketika komponen dimount
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   // Membersihkan event listener ketika komponen di-unmount
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
-
   const main = useRef();
 
   useGSAP(
@@ -90,11 +49,8 @@ export default function Hero() {
       <div className="max-w-[1100px] flex lg:gap-4 gap-6 flex-col lg:h-screen h-[810px] m-auto pb-1">
         {/* <div ref={nameCopy} className="pt-16" /> */}
         <div
-          ref={nameSection}
           className="text z-0 max-w-[1100px] mr-11 pt-16"
           style={{
-            opacity: isScrolledToBgSection, // Mengubah opasitas sesuai dengan state isScrolledToBgSection
-            transform: nameTransform, // Terapkan transformasi CSS pada judul
             transition: "transform 0.3s ease", // Tambahkan transisi untuk efek yang mulus
           }}
         >
@@ -133,7 +89,6 @@ export default function Hero() {
         </div>
 
         <div
-          ref={bgSectionRef}
           className="w-full h-auto flex-grow grayscale-85 z-10"
           style={{
             backgroundImage: `url(${bgSection})`,
